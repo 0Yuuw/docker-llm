@@ -1,0 +1,53 @@
+# 📦 Auth + LLM Backend
+
+Un serveur **FastAPI** combinant :
+- Authentification **JWT** avec inscription/login (`/register`, `/login`, `/me`)
+- Accès protégé à un **modèle LLM** (`/ask`) via clé API
+- Base de données **SQLite** pour stocker les utilisateurs
+- Intégration de **llama-cpp-python** pour l'inférence locale
+
+---
+
+## 🚀 Démarrage rapide
+
+### 1. Prérequis
+
+- Docker
+- Un modèle **GGUF** pour `llama-cpp`
+
+---
+
+### 2. Lancement
+
+```bash
+docker-compose up --build -d
+
+## 📚 Liste des Endpoints
+
+### Authentification
+
+- `POST /register`  
+  ➔ Inscrire un nouvel utilisateur (username + password)
+
+- `POST /login`  
+  ➔ Connecter un utilisateur et recevoir un token JWT
+
+- `GET /me`  
+  ➔ Obtenir les informations du compte connecté (nécessite JWT dans Authorization)
+
+---
+
+### LLM
+
+- `POST /ask`  
+  ➔ Envoyer un prompt au modèle LLM (nécessite clé API `X-API-Key`)
+
+
+## 📋 À faire / Idées d'amélioration
+
+- [ ] **Créer un fichier `.env`** pour définir les clés secrètes et le port proprement
+- [ ] **Logger toutes les requêtes** dans une table SQLite (`requests_log`)
+- [ ] **Protéger `/register` avec un captcha léger** (ex: hCaptcha)
+- [ ] **Supporter plusieurs modèles LLM sélectionnables dynamiquement**
+- [ ] **Ajouter un endpoint `/models`** pour lister les modèles disponibles
+- [ ] **Ajouter un mode admin** pour la gestion des utilisateurs (dashboard simple)
